@@ -1,1 +1,7 @@
-<li [class]="getItemVariant()">Task: {{ name }} => <span [class]="getBadgeVariant()">{{ getComplete() }}</span></li>
+<li [class]="getItemVariant()">
+  <button mat-raised-button (click)="toggleComplete()">{{ getButtonText() }}</button>
+  <p>
+    Task: {{ name }} =>
+    <span [class]="getBadgeVariant()">{{ getComplete() }}</span>
+  </p>
+</li>

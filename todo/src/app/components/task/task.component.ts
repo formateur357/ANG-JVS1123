@@ -24,4 +24,12 @@ export class TaskComponent {
 
     return this.complete ? variant + 'success' : variant + 'warning';
   }
+
+  getButtonText(): string {
+    return this.complete ? 'Annuler' : 'Terminer';
+  }
+
+  toggleComplete(): void {
+    this.complete = !this.complete;
+  }
 }
