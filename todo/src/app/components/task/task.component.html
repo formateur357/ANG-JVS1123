@@ -1,1 +1,1 @@
-<li>Task: {{ name }} => {{ getComplete() }}</li>
+<li [class]="getItemVariant()">Task: {{ name }} => <span [class]="getBadgeVariant()">{{ getComplete() }}</span></li>

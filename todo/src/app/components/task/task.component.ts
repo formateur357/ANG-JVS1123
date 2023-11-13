@@ -7,9 +7,21 @@ import { Component } from '@angular/core';
 })
 export class TaskComponent {
   public name: string = 'JeanJean';
-  public complete: boolean = true;
+  public complete: boolean = false;
 
   getComplete(): string {
     return this.complete ? 'Fini' : 'En cours...';
+  }
+
+  getBadgeVariant(): string {
+    const variant = 'd-inline float-right badge text-bg-';
+
+    return this.complete ? variant + 'success' : variant + 'warning';
+  }
+
+  getItemVariant(): string {
+    const variant = 'list-group-item list-group-item-';
+
+    return this.complete ? variant + 'success' : variant + 'warning';
   }
 }
