@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-task',
@@ -6,8 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./task.component.scss'],
 })
 export class TaskComponent {
-  public name: string = 'JeanJean';
-  public complete: boolean = false;
+  @Input() name: string = '';
+  @Input() complete!: boolean;
 
   getComplete(): string {
     return this.complete ? 'Fini' : 'En cours...';
