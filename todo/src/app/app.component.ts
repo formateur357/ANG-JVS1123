@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Task } from './class/task.model';
+// import { Task } from './class/task.model';
 import { TodolistService } from './services/todolist.service';
 
 @Component({

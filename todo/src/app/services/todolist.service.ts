@@ -26,7 +26,7 @@ export class TodolistService {
   public async updateList(list: Task[]): Promise<void> {
     this.tasks = await new Promise<Task[]>((resolve) => {
       setTimeout(() => {
-        resolve(Object.assign([], initialTasks));
+        resolve(Object.assign([], list));
       }, 3000);
     });
   }
