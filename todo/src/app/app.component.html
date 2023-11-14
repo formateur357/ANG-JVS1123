@@ -1,5 +1,4 @@
+<p>Compteur: {{ count }}</p>
 <ul>
-  <app-task [name]="name1" [complete]="complete1"></app-task>
-  <app-task [name]="name2" [complete]="complete2"></app-task>
-  <app-task [name]="name3" [complete]="complete3"></app-task>
+  <app-task *ngFor="let task of tasks; trackBy:trackByFunction" [task]="task" (message)="toggleCount($event)"></app-task>
 </ul>

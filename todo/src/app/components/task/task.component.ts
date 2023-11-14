@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Task } from 'src/app/class/task.model';
 
 @Component({
   selector: 'app-task',
@@ -6,30 +7,31 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./task.component.scss'],
 })
 export class TaskComponent {
-  @Input() name: string = '';
-  @Input() complete!: boolean;
+  @Input() task!: Task;
+  @Output() message: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   getComplete(): string {
-    return this.complete ? 'Fini' : 'En cours...';
+    return this.task.complete ? 'Fini' : 'En cours...';
   }
 
   getBadgeVariant(): string {
     const variant = 'd-inline float-right badge text-bg-';
 
-    return this.complete ? variant + 'success' : variant + 'warning';
+    return this.task.complete ? variant + 'success' : variant + 'warning';
   }
 
   getItemVariant(): string {
     const variant = 'list-group-item list-group-item-';
 
-    return this.complete ? variant + 'success' : variant + 'warning';
+    return this.task.complete ? variant + 'success' : variant + 'warning';
   }
 
   getButtonText(): string {
-    return this.complete ? 'Annuler' : 'Terminer';
+    return this.task.complete ? 'Annuler' : 'Terminer';
   }
 
   toggleComplete(): void {
-    this.complete = !this.complete;
+    this.task.complete = !this.task.complete;
+    this.message.emit(this.task.complete);
   }
 }
