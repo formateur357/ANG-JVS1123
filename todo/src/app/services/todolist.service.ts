@@ -35,4 +35,8 @@ export class TodolistService {
     let task = this.tasks.find((task) => task.id === id);
     if (task) task.complete = !task.complete;
   }
+
+  public getTaskById(id: number): Task | undefined {
+    return this.tasks.find((task) => task.id === id);
+  }
 }

@@ -1,8 +1,11 @@
 <!-- <input type="text" [(ngModel)]="task.title"> -->
 <li [class]="getItemVariant()">
   <button mat-raised-button (click)="toggleComplete()">{{ getButtonText() }}</button>
-  <p>
-    Task: {{ task.title }} =>
-    <span [class]="getBadgeVariant()">{{ getComplete() }}</span>
-  </p>
+  <a [routerLink]="['/todolist', task.id]">
+    <p>
+      Task: {{ task.title }} =>
+      <span [class]="getBadgeVariant()">{{ getComplete() }}</span>
+    </p>
+  </a>
+
 </li>
