@@ -26,8 +26,13 @@ export class TodolistService {
   public async updateList(list: Task[]): Promise<void> {
     this.tasks = await new Promise<Task[]>((resolve) => {
       setTimeout(() => {
-        resolve(Object.assign([], list));
+        resolve([...list]);
       }, 3000);
     });
+  }
+
+  public toggleComplete(id: number): void {
+    let task = this.tasks.find((task) => task.id === id);
+    if (task) task.complete = !task.complete;
   }
 }
