@@ -8,7 +8,6 @@ import { Task } from 'src/app/class/task.model';
 })
 export class TaskComponent {
   @Input() task!: Task;
-  @Output() message: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   getComplete(): string {
     return this.task.complete ? 'Fini' : 'En cours...';
@@ -32,6 +31,5 @@ export class TaskComponent {
 
   toggleComplete(): void {
     this.task.complete = !this.task.complete;
-    this.message.emit(this.task.complete);
   }
 }

@@ -1,4 +1,16 @@
-<p>Compteur: {{ count }}</p>
-<ul>
-  <app-task *ngFor="let task of tasks; trackBy:trackByFunction" [task]="task" (message)="toggleCount($event)"></app-task>
+<p>{{ promise | async }}</p>
+<p [ngStyle]="{ color: textColor }">
+  Pourcentage des taches terminees : {{ nbTrue }}/{{ nbTasks }} = {{ percent }}
+</p>
+
+<div [ngSwitch]="true">
+  <h2 *ngSwitchCase="percent > 0 && percent <= 50">Et c'est parti !!</h2>
+  <h2 *ngSwitchCase="percent > 50 && percent < 100">On en voit le bout !</h2>
+  <h2 *ngSwitchCase="percent === 100">Fini !!</h2>
+  <h2 *ngSwitchDefault>Allez du nerf !!</h2>
+</div>
+
+<ul *ngIf="tasks.length; else noTaskBlock">
+  <app-task *ngFor="let task of tasks; trackBy:trackByFunction" [task]="task"></app-task>
 </ul>
+<ng-template #noTaskBlock>Il n'y a aucune tache pour le moment.</ng-template>

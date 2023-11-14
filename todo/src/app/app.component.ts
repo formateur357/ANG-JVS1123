@@ -8,18 +8,55 @@ import { Task } from './class/task.model';
 })
 export class AppComponent {
   title = 'todo';
-  public count: number = 0;
-
+  public promise: Promise<string>;
   public tasks: Task[] = [];
 
-  public toggleCount(state: boolean): void {
-    this.count += state ? 1 : -1;
+  constructor() {
+    this.promise = new Promise<string>((resolve) => {
+      setTimeout(() => {
+        this.tasks.push(
+          new Task(1, 'Promener le chien', false, 'Dans le parc', new Date())
+        );
+        this.tasks.push(
+          new Task(
+            2,
+            'Faire le menage',
+            false,
+            'Aspi',
+            new Date('01/04/2023 09:00')
+          )
+        );
+        this.tasks.push(
+          new Task(
+            3,
+            'Faire les courses',
+            false,
+            'Liste: ...',
+            new Date('03/04/1999 13:23')
+          )
+        );
+        resolve('Promesse resolu');
+      }, 3000);
+    });
   }
 
-  constructor() {
-    this.tasks.push(new Task(1, 'Promener le chien', false, 'Dans le parc'));
-    this.tasks.push(new Task(2, 'Faire le menage', false, 'Aspi'));
-    this.tasks.push(new Task(3, 'Faire les courses', false, 'Liste: ...'));
+  public get nbTrue(): number {
+    return this.tasks?.length
+      ? this.tasks.filter((task) => task.complete).length
+      : 0;
+  }
+
+  public get nbTasks(): number {
+    return this.tasks?.length ? this.tasks.length : 0;
+  }
+
+  public get percent(): number {
+    return this.nbTasks != 0 ? (this.nbTrue / this.nbTasks) * 100 : 0;
+  }
+
+  public get textColor(): string {
+    let color = this.percent > 0 ? 'orange' : 'red';
+    return this.percent === 100 ? 'green' : color;
   }
 
   trackByFunction(index: number, item: any): string {

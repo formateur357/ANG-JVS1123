@@ -2,7 +2,10 @@
 <li [class]="getItemVariant()">
   <button mat-raised-button (click)="toggleComplete()">{{ getButtonText() }}</button>
   <p>
+    Id: {{ task.id }}<br />
     Task: {{ task.title }} =>
-    <span [class]="getBadgeVariant()">{{ getComplete() }}</span>
+    <span [class]="getBadgeVariant()">{{ getComplete() }}</span><br />
+    Description: {{ task.description }}<br />
+    Date de creation: {{ task.created | date:'dd/MM/y hh:mm' }}
   </p>
 </li>
