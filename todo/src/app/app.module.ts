@@ -11,6 +11,7 @@ import { TodolistComponent } from './components/todolist/todolist.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { NavComponent } from './components/nav/nav.component';
+import { TaskDetailsComponent } from './components/task-details/task-details.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { NavComponent } from './components/nav/nav.component';
     LoginComponent,
     LogoutComponent,
     NavComponent,
+    TaskDetailsComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, MatButtonModule, FormsModule],
   providers: [],
