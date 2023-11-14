@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Task } from './class/task.model';
+import { TodolistService } from './services/todolist.service';
 
 @Component({
   selector: 'app-root',
@@ -8,46 +9,18 @@ import { Task } from './class/task.model';
 })
 export class AppComponent {
   title = 'todo';
-  public promise: Promise<string>;
-  public tasks: Task[] = [];
+  // public tasks: Task[] = [];
 
-  constructor() {
-    this.promise = new Promise<string>((resolve) => {
-      setTimeout(() => {
-        this.tasks.push(
-          new Task(1, 'Promener le chien', false, 'Dans le parc', new Date())
-        );
-        this.tasks.push(
-          new Task(
-            2,
-            'Faire le menage',
-            false,
-            'Aspi',
-            new Date('01/04/2023 09:00')
-          )
-        );
-        this.tasks.push(
-          new Task(
-            3,
-            'Faire les courses',
-            false,
-            'Liste: ...',
-            new Date('03/04/1999 13:23')
-          )
-        );
-        resolve('Promesse resolu');
-      }, 3000);
-    });
-  }
+  constructor(public todo: TodolistService) {}
 
   public get nbTrue(): number {
-    return this.tasks?.length
-      ? this.tasks.filter((task) => task.complete).length
+    return this.todo.tasks?.length
+      ? this.todo.tasks.filter((task) => task.complete).length
       : 0;
   }
 
   public get nbTasks(): number {
-    return this.tasks?.length ? this.tasks.length : 0;
+    return this.todo.tasks?.length ? this.todo.tasks.length : 0;
   }
 
   public get percent(): number {

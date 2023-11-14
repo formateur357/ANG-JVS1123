@@ -1,4 +1,3 @@
-<p>{{ promise | async }}</p>
 <p [ngStyle]="{ color: textColor }">
   Pourcentage des taches terminees : {{ nbTrue }}/{{ nbTasks }} = {{ percent }}
 </p>
@@ -10,7 +9,7 @@
   <h2 *ngSwitchDefault>Allez du nerf !!</h2>
 </div>
 
-<ul *ngIf="tasks.length; else noTaskBlock">
-  <app-task *ngFor="let task of tasks; trackBy:trackByFunction" [task]="task"></app-task>
+<ul *ngIf="todo.tasks.length; else noTaskBlock">
+  <app-task *ngFor="let task of todo.tasks; trackBy:trackByFunction" [task]="task"></app-task>
 </ul>
 <ng-template #noTaskBlock>Il n'y a aucune tache pour le moment.</ng-template>
