@@ -4,31 +4,31 @@ import { TodolistComponent } from './components/todolist/todolist.component';
 import { LoginComponent } from './components/login/login.component';
 import { TaskDetailsComponent } from './components/task-details/task-details.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { authGuard } from './guards/auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 import { TaskFormComponent } from './components/task-form/task-form.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  {path: '', component: TodolistComponent, pathMatch: 'full'},
   {
     path: '',
-    canActivate: [authGuard],
+    canActivate: [AuthGuard],
     children: [
-      { path: 'task-form', component: TaskFormComponent },
-      { path: 'todolist/:id', component: TaskDetailsComponent },
-      { path: 'todolist', component: TodolistComponent },
-      { path: 'userform', component: UserFormComponent },
-      { path: 'userlist', component: UserListComponent },
-      { path: '', component: TodolistComponent, pathMatch: 'full' },
-    ],
+      {path: 'user-form', component: UserFormComponent},
+      {path: 'userlist', component: UserListComponent},
+      {path: 'task-form', component: TaskFormComponent},
+      {path: 'todolist/:id', component: TaskDetailsComponent},
+      {path: 'todolist', component: TodolistComponent}
+    ]
   },
-  { path: '404', component: NotFoundComponent },
-  { path: '**', redirectTo: '/404' },
+  {path: 'login', component: LoginComponent},
+  {path: '404', component: NotFoundComponent},
+  {path: '**', redirectTo: '404'}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
