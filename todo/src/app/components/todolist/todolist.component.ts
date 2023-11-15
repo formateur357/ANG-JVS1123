@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
+import { Task } from 'src/app/class/task.model';
 import { TodolistService } from 'src/app/services/todolist.service';
 
 @Component({
@@ -6,19 +8,26 @@ import { TodolistService } from 'src/app/services/todolist.service';
   templateUrl: './todolist.component.html',
   styleUrls: ['./todolist.component.scss'],
 })
-export class TodolistComponent {
-  // public tasks: Task[] = [];
+export class TodolistComponent implements OnInit {
+  public tasks: Task[] = [];
+  public tasks$!: Observable<Task[]>;
+  public subscribe!: Subscription | undefined;
 
   constructor(public todo: TodolistService) {}
 
+  ngOnInit(): void {
+    this.tasks$ = this.todo.getTasks();
+    this.getTasks();
+  }
+
   public get nbTrue(): number {
-    return this.todo.tasks?.length
-      ? this.todo.tasks.filter((task) => task.complete).length
+    return this.tasks?.length
+      ? this.tasks.filter((task) => task.complete).length
       : 0;
   }
 
   public get nbTasks(): number {
-    return this.todo.tasks?.length ? this.todo.tasks.length : 0;
+    return this.tasks?.length ? this.tasks.length : 0;
   }
 
   public get percent(): number {
@@ -28,6 +37,12 @@ export class TodolistComponent {
   public get textColor(): string {
     let color = this.percent > 0 ? 'orange' : 'red';
     return this.percent === 100 ? 'green' : color;
+  }
+
+  public getTasks(): void {
+    this.subscribe = this.tasks$.subscribe((tasks) => {
+      this.tasks = tasks;
+    });
   }
 
   trackByFunction(index: number, item: any): string {
