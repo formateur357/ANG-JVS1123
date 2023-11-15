@@ -3,15 +3,9 @@ import { Task } from '../class/task.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 const initialTasks: Task[] = [
-  new Task(1, 'Promener le chien', false, 'Dans le parc', new Date()),
-  new Task(2, 'Faire le menage', false, 'Aspi', new Date('01/04/2023 09:00')),
-  new Task(
-    3,
-    'Faire les courses',
-    false,
-    'Liste: ...',
-    new Date('03/04/1999 13:23')
-  ),
+  new Task('Promener le chien', false, 'Dans le parc'),
+  new Task('Faire le menage', false, 'Aspi'),
+  new Task('Faire les courses', false, 'Liste: ...'),
 ];
 
 @Injectable({
@@ -55,5 +49,15 @@ export class TodolistService {
 
   public getTaskById(id: number): Task | undefined {
     return this.tasks.find((task) => task.id === id);
+  }
+
+  private getLastId() {
+    return Math.max(...this.tasks.map((task) => task.id));
+  }
+
+  public addTask(task: Task) {
+    // task.id = this.getLastId() + 1;
+    this.tasks.push(task);
+    this.emit(this.tasks);
   }
 }

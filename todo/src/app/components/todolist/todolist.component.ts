@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { Task } from 'src/app/class/task.model';
 import { TodolistService } from 'src/app/services/todolist.service';
@@ -8,7 +8,7 @@ import { TodolistService } from 'src/app/services/todolist.service';
   templateUrl: './todolist.component.html',
   styleUrls: ['./todolist.component.scss'],
 })
-export class TodolistComponent implements OnInit {
+export class TodolistComponent implements OnInit, OnDestroy {
   public tasks: Task[] = [];
   public tasks$!: Observable<Task[]>;
   public subscribe!: Subscription | undefined;
@@ -18,6 +18,10 @@ export class TodolistComponent implements OnInit {
   ngOnInit(): void {
     this.tasks$ = this.todo.getTasks();
     this.getTasks();
+  }
+
+  ngOnDestroy(): void {
+    this.subscribe?.unsubscribe();
   }
 
   public get nbTrue(): number {
