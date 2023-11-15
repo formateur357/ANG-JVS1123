@@ -12,6 +12,7 @@ import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { NavComponent } from './components/nav/nav.component';
 import { TaskDetailsComponent } from './components/task-details/task-details.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { TaskDetailsComponent } from './components/task-details/task-details.com
     LogoutComponent,
     NavComponent,
     TaskDetailsComponent,
+    NotFoundComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, MatButtonModule, FormsModule],
   providers: [],
